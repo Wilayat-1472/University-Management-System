@@ -11,7 +11,7 @@ from app.models.user import User
 
 router = APIRouter()
 
-instructor_or_admin = RoleChecker(["Instructor", "Admin"])
+instructor_or_admin = RoleChecker(["Faculty", "Admin"])
 student_only = RoleChecker(["Student"])
 
 @router.get("/", response_model=List[Course])

@@ -7,6 +7,10 @@ class CourseBase(BaseModel):
     name: str
     description: Optional[str] = None
     credits: int = 3
+    # Geofencing fields
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    allowed_radius: float = 200.0  # meters
 
 class CourseCreate(CourseBase):
     pass
@@ -16,6 +20,9 @@ class CourseUpdate(BaseModel):
     name: Optional[str] = None
     description: Optional[str] = None
     credits: Optional[int] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    allowed_radius: Optional[float] = None
 
 class CourseInDBBase(CourseBase):
     id: int

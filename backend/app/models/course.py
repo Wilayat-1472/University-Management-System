@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
@@ -13,6 +13,11 @@ class Course(Base):
     description = Column(String, nullable=True)
     credits = Column(Integer, default=3)
     instructor_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+
+    # Geofencing fields for verified attendance
+    latitude = Column(Float, nullable=True)  # Required geo-coordinate for class location
+    longitude = Column(Float, nullable=True)
+    allowed_radius = Column(Float, default=200.0)  # Allowed radius in meters
     
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())

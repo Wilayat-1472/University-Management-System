@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Boolean
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime, Boolean
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
@@ -26,9 +26,32 @@ class AttendanceRecord(Base):
     id = Column(Integer, primary_key=True, index=True)
     session_id = Column(Integer, ForeignKey("attendance_sessions.id"), nullable=False)
     student_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    status = Column(String(20), default="Present") # e.g., Present, Late
+    status = Column(String(20), default="Present")  # Present, Late, Remote, Absent
     marked_at = Column(DateTime(timezone=True), server_default=func.now())
     ip_address = Column(String(50), nullable=True)
 
+    # --- Phase 3: Verification fields ---
+    latitude = Column(Float, nullable=True)
+    longitude = Column(Float, nullable=True)
+    is_mock_location = Column(Boolean, default=False)
+    is_verified = Column(Boolean, default=False)
+    device_id = Column(String(100), nullable=True)  # Cross-checked against User.device_mac_address
+    distance_from_class = Column(Float, nullable=True)  # Calculated distance in meters
+
     session = relationship("AttendanceSession", back_populates="records")
     student = relationship("User")
+    heartbeats = relationship("AttendanceHeartbeat", back_populates="record", cascade="all, delete-orphan")
+
+
+class AttendanceHeartbeat(Base):
+    """Periodic location pings sent by the student's device during a live session."""
+    __tablename__ = "attendance_heartbeats"
+
+    id = Column(Integer, primary_key=True, index=True)
+    record_id = Column(Integer, ForeignKey("attendance_records.id"), nullable=False)
+    latitude = Column(Float, nullable=False)
+    longitude = Column(Float, nullable=False)
+    is_within_radius = Column(Boolean, default=True)
+    timestamp = Column(DateTime(timezone=True), server_default=func.now())
+
+    record = relationship("AttendanceRecord", back_populates="heartbeats")

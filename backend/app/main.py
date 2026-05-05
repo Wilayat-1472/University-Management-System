@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 
 from app.config import settings
-from app.routers import auth, users, profile, courses, attendance
+from app.routers import auth, users, profile, courses, attendance, finance, payments, analytics
 from app.database import create_tables
 
 # Make sure tables are created
@@ -30,6 +30,9 @@ app.include_router(users.router, prefix=f"{settings.API_PREFIX}/users", tags=["u
 app.include_router(profile.router, prefix=f"{settings.API_PREFIX}/profile", tags=["profile"])
 app.include_router(courses.router, prefix=f"{settings.API_PREFIX}/courses", tags=["courses"])
 app.include_router(attendance.router, prefix=f"{settings.API_PREFIX}/attendance", tags=["attendance"])
+app.include_router(finance.router, prefix=f"{settings.API_PREFIX}/finance", tags=["finance"])
+app.include_router(payments.router, prefix=f"{settings.API_PREFIX}/payments", tags=["payments"])
+app.include_router(analytics.router, prefix=f"{settings.API_PREFIX}/analytics", tags=["analytics"])
 
 @app.get("/")
 def root():
