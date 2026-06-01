@@ -1,19 +1,27 @@
-<![CDATA[<div align="center">
+<p align="center">
+  <img src="https://img.icons8.com/3d-fluency/94/graduation-cap.png" width="80" alt="UMS Logo"/>
+</p>
 
-# 🎓 University Management System
+<h1 align="center">University Management System</h1>
 
-**A comprehensive, production-grade REST API for managing university operations — built with FastAPI, SQLAlchemy, and a layered clean architecture.**
+<p align="center">
+  <em>A comprehensive, production-grade REST API for managing university operations<br/>built with FastAPI, SQLAlchemy, and a layered clean architecture.</em>
+</p>
 
-[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
-[![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white)](https://sqlalchemy.org)
-[![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
+<p align="center">
+  <a href="https://python.org"><img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/></a>
+  <a href="https://fastapi.tiangolo.com"><img src="https://img.shields.io/badge/FastAPI-0.111-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI"/></a>
+  <a href="https://sqlalchemy.org"><img src="https://img.shields.io/badge/SQLAlchemy-2.0-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white" alt="SQLAlchemy"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License"/></a>
+</p>
 
----
-
-[Features](#-features) · [Architecture](#-architecture) · [Quick Start](#-quick-start) · [API Reference](#-api-reference) · [Roadmap](#-roadmap)
-
-</div>
+<p align="center">
+  <a href="#-features">Features</a> •
+  <a href="#-architecture">Architecture</a> •
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-api-reference">API Reference</a> •
+  <a href="#-roadmap">Roadmap</a>
+</p>
 
 ---
 
@@ -28,40 +36,43 @@ The **University Management System (UMS)** is a modular backend platform designe
 - **Payroll** — Staff salary management with status lifecycle tracking
 - **Analytics Dashboard** — Revenue summaries, attendance metrics, enrollment stats, and payroll reports
 
-> **Status:** Backend API is fully functional. Frontend development is planned.
+> **Status:** Backend API is fully functional. Frontend development is in progress.
 
 ---
 
 ## ✨ Features
 
 ### 🔐 Authentication & Authorization
+
 | Capability | Details |
-|---|---|
+| :--- | :--- |
 | JWT Authentication | Access + Refresh token flow via OAuth2 password grant |
 | Role-Based Access Control | Granular permissions for `Admin`, `Faculty`, and `Student` roles |
 | Password Security | bcrypt hashing with salt |
 | Token Expiry | Configurable access (30 min) and refresh (7 day) token lifetimes |
 
 ### 📚 Course Management
+
 | Capability | Details |
-|---|---|
+| :--- | :--- |
 | CRUD Operations | Create, list, and manage courses with credit hours |
 | Geofencing | Each course stores latitude, longitude, and allowed radius for location-verified attendance |
 | Enrollment | Students self-enroll; Faculty/Admin create courses |
 
 ### 📍 Smart Attendance System
-The attendance module is the flagship feature — a **multi-layered verification engine** that goes beyond basic check-ins:
+
+The attendance module is the **flagship feature** — a multi-layered verification engine that goes beyond basic check-ins:
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                  VERIFICATION PIPELINE                  │
-├─────────────────────────────────────────────────────────┤
-│  1. Verification Code  →  Session-specific random code  │
-│  2. Mock Location      →  Flags spoofed GPS signals     │
-│  3. Device ID          →  Cross-checks MAC address      │
-│  4. Geofencing         →  Haversine distance calc       │
-│  5. Live Heartbeat     →  Periodic location pings       │
-└─────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│                   VERIFICATION PIPELINE                     │
+│                                                             │
+│  Step 1 ─ Verification Code    Session-specific random code │
+│  Step 2 ─ Mock Location        Flags spoofed GPS signals    │
+│  Step 3 ─ Device ID            Cross-checks MAC address     │
+│  Step 4 ─ Geofencing           Haversine distance calc      │
+│  Step 5 ─ Live Heartbeat       Periodic location pings      │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 - **Session Management** — Instructors start/end attendance windows with auto-generated verification codes
@@ -70,8 +81,9 @@ The attendance module is the flagship feature — a **multi-layered verification
 - **Status Classification** — `Present` · `Late` · `Remote` · `Absent` with full audit trail
 
 ### 💰 Finance & Billing
+
 | Capability | Details |
-|---|---|
+| :--- | :--- |
 | Fee Structures | Per-course or university-wide fee definitions by semester |
 | 1Bill-Style Invoices | Auto-generated consumer numbers, bill references, and shareable payment links |
 | Payment Recording | Manual (Cash, Bank Transfer) and digital (JazzCash, EasyPaisa, Card) methods |
@@ -79,15 +91,17 @@ The attendance module is the flagship feature — a **multi-layered verification
 | Invoice Lifecycle | `Unpaid` → `Partially Paid` → `Paid` / `Overdue` / `Cancelled` |
 
 ### 💼 Payroll Management
+
 | Capability | Details |
-|---|---|
+| :--- | :--- |
 | Salary Records | Monthly payroll entries with base salary, allowances, and deductions |
 | Status Workflow | `Pending` → `Processed` → `Paid` |
 | Staff Scoping | Payrolls linked to Faculty and Admin users |
 
 ### 📊 Analytics & Reporting
+
 | Endpoint | Description |
-|---|---|
+| :--- | :--- |
 | `GET /analytics/revenue` | Revenue summary — invoiced vs collected vs outstanding, grouped by semester |
 | `GET /analytics/attendance` | Per-course attendance rates and verification metrics |
 | `GET /analytics/enrollments` | Student enrollment counts per course |
@@ -102,60 +116,56 @@ The project follows a **clean, layered architecture** that separates concerns ac
 ```
 backend/
 ├── app/
-│   ├── main.py              # FastAPI application entry point
-│   ├── config.py            # Centralized settings (DB, JWT, CORS)
-│   ├── database.py          # SQLAlchemy engine, session, and Base
+│   ├── main.py                # FastAPI app entry point
+│   ├── config.py              # Centralized settings (DB, JWT, CORS)
+│   ├── database.py            # SQLAlchemy engine, session, Base
 │   │
-│   ├── models/              # SQLAlchemy ORM models (data layer)
-│   │   ├── user.py          # User with role FK & device MAC
-│   │   ├── role.py          # Role (Admin, Faculty, Student)
-│   │   ├── profile.py       # Extended user profile
-│   │   ├── course.py        # Course + Enrollment + geofencing
-│   │   ├── attendance.py    # Session, Record, Heartbeat
-│   │   └── finance.py       # FeeStructure, Invoice, Payment, Payroll
+│   ├── models/                # ORM models (data layer)
+│   │   ├── user.py            # User with role FK and device MAC
+│   │   ├── role.py            # Role definitions
+│   │   ├── profile.py         # Extended user profile
+│   │   ├── course.py          # Course + Enrollment + geofencing
+│   │   ├── attendance.py      # Session, Record, Heartbeat
+│   │   └── finance.py         # FeeStructure, Invoice, Payment, Payroll
 │   │
-│   ├── schemas/             # Pydantic request/response schemas
-│   │   ├── auth.py          # Token schemas
-│   │   ├── user.py          # User CRUD schemas
-│   │   ├── profile.py       # Profile schemas
-│   │   ├── course.py        # Course & Enrollment schemas
-│   │   ├── attendance.py    # Attendance schemas
-│   │   └── finance.py       # Finance, Invoice, Payment schemas
+│   ├── schemas/               # Pydantic request/response schemas
+│   │   ├── auth.py            # Token schemas
+│   │   ├── user.py            # User CRUD schemas
+│   │   ├── course.py          # Course and Enrollment schemas
+│   │   ├── attendance.py      # Attendance schemas
+│   │   └── finance.py         # Finance, Invoice, Payment schemas
 │   │
-│   ├── routers/             # API route definitions
-│   │   ├── auth.py          # Login, Register, /me
-│   │   ├── users.py         # User management (Admin)
-│   │   ├── profile.py       # Profile CRUD
-│   │   ├── courses.py       # Course & Enrollment endpoints
-│   │   ├── attendance.py    # Session, Mark, Heartbeat
-│   │   ├── finance.py       # Fee structures & Payroll
-│   │   ├── payments.py      # Invoices, Payments, Webhooks
-│   │   └── analytics.py     # Dashboard analytics
+│   ├── routers/               # API route handlers
+│   │   ├── auth.py            # Login, Register, /me
+│   │   ├── users.py           # User management (Admin)
+│   │   ├── profile.py         # Profile CRUD
+│   │   ├── courses.py         # Course and Enrollment endpoints
+│   │   ├── attendance.py      # Session, Mark, Heartbeat
+│   │   ├── finance.py         # Fee structures and Payroll
+│   │   ├── payments.py        # Invoices, Payments, Webhooks
+│   │   └── analytics.py       # Dashboard analytics
 │   │
-│   ├── services/            # Business logic layer
-│   │   ├── auth_service.py
-│   │   ├── user_service.py
-│   │   ├── course_service.py
-│   │   ├── attendance_service.py
-│   │   ├── finance_service.py
-│   │   ├── billing_service.py
-│   │   └── analytics_service.py
+│   ├── services/              # Business logic layer
+│   │   ├── auth_service.py    # Token validation, current user
+│   │   ├── user_service.py    # User CRUD operations
+│   │   ├── course_service.py  # Course logic
+│   │   ├── attendance_service.py  # Verification engine
+│   │   ├── finance_service.py # Fee and payroll logic
+│   │   ├── billing_service.py # Invoice generation and payments
+│   │   └── analytics_service.py   # Aggregation queries
 │   │
-│   ├── middleware/           # RBAC middleware
-│   │   └── rbac.py          # RoleChecker dependency
+│   ├── middleware/            # Custom middleware
+│   │   └── rbac.py            # RoleChecker dependency
 │   │
-│   └── utils/               # Shared utilities
-│       └── security.py      # Password hashing, JWT creation
+│   └── utils/                 # Shared utilities
+│       └── security.py        # Password hashing, JWT helpers
 │
-├── tests/                   # Test suite
-│   ├── test_finance.py
-│   └── test_verification.py
-│
-├── seed_data.py             # Database seeder (roles + admin user)
-└── requirements.txt         # Python dependencies
+├── tests/                     # Test suite
+├── seed_data.py               # Database seeder
+└── requirements.txt           # Python dependencies
 ```
 
-### Design Principles
+**Design Principles:**
 
 - **Separation of Concerns** — Routers handle HTTP, Services handle business logic, Models handle persistence
 - **Dependency Injection** — FastAPI's `Depends()` for DB sessions, authentication, and RBAC
@@ -168,39 +178,34 @@ backend/
 
 ### Prerequisites
 
-- **Python 3.10+**
-- **pip** (or any Python package manager)
-- **Git**
+- Python 3.10+
+- pip
+- Git
 
-### 1. Clone the Repository
+### Installation
 
 ```bash
+# 1. Clone the repository
 git clone https://github.com/Wilayat-1472/University-Management-System.git
 cd University-Management-System/backend
-```
 
-### 2. Create a Virtual Environment
-
-```bash
+# 2. Create and activate a virtual environment
 python -m venv venv
 source venv/bin/activate        # Linux / macOS
 # venv\Scripts\activate         # Windows
-```
 
-### 3. Install Dependencies
-
-```bash
+# 3. Install dependencies
 pip install -r requirements.txt
 ```
 
-### 4. Configure Environment Variables
+### Configuration
 
 Create a `.env` file in the `backend/` directory:
 
 ```env
 # Database (default: SQLite — switch to PostgreSQL for production)
 DATABASE_URL=sqlite:///./ums.db
-# DATABASE_URL=postgresql://ums_user:ums_password@localhost:5432/ums_db
+# DATABASE_URL=postgresql://user:password@localhost:5432/ums_db
 
 # JWT Secret — CHANGE THIS IN PRODUCTION
 SECRET_KEY=your-super-secret-key-here
@@ -210,35 +215,32 @@ ACCESS_TOKEN_EXPIRE_MINUTES=30
 REFRESH_TOKEN_EXPIRE_DAYS=7
 ```
 
-### 5. Seed the Database
+### Seed & Run
 
 ```bash
+# 4. Seed the database with default roles and admin user
 python seed_data.py
+
+# 5. Start the development server
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-This creates the default roles (`Student`, `Faculty`, `Admin`) and an admin user:
+**Default admin credentials:**
 
 | Field | Value |
-|---|---|
+| :--- | :--- |
 | Username | `admin` |
 | Email | `admin@ums.edu` |
 | Password | `adminpassword` |
 
 > ⚠️ **Change the default admin credentials immediately in production.**
 
-### 6. Run the Server
+### Explore the API
 
-```bash
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-```
+Once the server is running, visit:
 
-### 7. Explore the API
-
-| Resource | URL |
-|---|---|
-| 🌐 Root | [http://localhost:8000](http://localhost:8000) |
-| 📖 Swagger UI | [http://localhost:8000/api/v1/openapi.json](http://localhost:8000/docs) |
-| 📘 ReDoc | [http://localhost:8000/redoc](http://localhost:8000/redoc) |
+- **Swagger UI** — [http://localhost:8000/docs](http://localhost:8000/docs)
+- **ReDoc** — [http://localhost:8000/redoc](http://localhost:8000/redoc)
 
 ---
 
@@ -246,81 +248,89 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 All endpoints are prefixed with `/api/v1`. Authentication uses **Bearer JWT tokens**.
 
-### Authentication
+### Auth — `/api/v1/auth`
+
 | Method | Endpoint | Auth | Description |
-|---|---|---|---|
-| `POST` | `/auth/login` | ❌ | OAuth2 login → returns access + refresh tokens |
-| `POST` | `/auth/register` | ❌ | Register a new user |
-| `GET` | `/auth/me` | ✅ | Get current authenticated user |
+| :--- | :--- | :---: | :--- |
+| `POST` | `/login` | — | OAuth2 login, returns access + refresh tokens |
+| `POST` | `/register` | — | Register a new user |
+| `GET` | `/me` | ✅ | Get current authenticated user |
 
-### Users
+### Users — `/api/v1/users`
+
 | Method | Endpoint | Auth | Roles | Description |
-|---|---|---|---|---|
-| `GET` | `/users/` | ✅ | Admin | List all users |
-| `GET` | `/users/{id}` | ✅ | Admin | Get user by ID |
+| :--- | :--- | :---: | :--- | :--- |
+| `GET` | `/` | ✅ | Admin | List all users |
+| `GET` | `/{id}` | ✅ | Admin | Get user by ID |
 
-### Profile
+### Profile — `/api/v1/profile`
+
 | Method | Endpoint | Auth | Description |
-|---|---|---|---|
-| `GET` | `/profile/me` | ✅ | Get own profile |
-| `PUT` | `/profile/me` | ✅ | Update own profile |
+| :--- | :--- | :---: | :--- |
+| `GET` | `/me` | ✅ | Get own profile |
+| `PUT` | `/me` | ✅ | Update own profile |
 
-### Courses
-| Method | Endpoint | Auth | Roles | Description |
-|---|---|---|---|---|
-| `GET` | `/courses/` | ✅ | Any | List all courses |
-| `POST` | `/courses/` | ✅ | Faculty, Admin | Create a new course |
-| `POST` | `/courses/{id}/enroll` | ✅ | Student | Enroll in a course |
+### Courses — `/api/v1/courses`
 
-### Attendance
 | Method | Endpoint | Auth | Roles | Description |
-|---|---|---|---|---|
-| `POST` | `/attendance/sessions` | ✅ | Faculty, Admin | Start attendance session |
-| `PUT` | `/attendance/sessions/{id}/end` | ✅ | Faculty, Admin | End attendance session |
-| `GET` | `/attendance/sessions/{id}/records` | ✅ | Faculty, Admin | Get session records |
-| `POST` | `/attendance/mark` | ✅ | Student | Mark attendance (with verification) |
-| `POST` | `/attendance/heartbeat` | ✅ | Student | Send location heartbeat |
+| :--- | :--- | :---: | :--- | :--- |
+| `GET` | `/` | ✅ | Any | List all courses |
+| `POST` | `/` | ✅ | Faculty, Admin | Create a new course |
+| `POST` | `/{id}/enroll` | ✅ | Student | Enroll in a course |
 
-### Finance
-| Method | Endpoint | Auth | Roles | Description |
-|---|---|---|---|---|
-| `POST` | `/finance/fees` | ✅ | Admin | Create fee structure |
-| `GET` | `/finance/fees` | ✅ | Admin, Faculty | List fee structures |
-| `POST` | `/finance/payroll` | ✅ | Admin | Create payroll entry |
-| `GET` | `/finance/payroll` | ✅ | Admin | List payroll records |
-| `PUT` | `/finance/payroll/{id}/status` | ✅ | Admin | Update payroll status |
+### Attendance — `/api/v1/attendance`
 
-### Payments
 | Method | Endpoint | Auth | Roles | Description |
-|---|---|---|---|---|
-| `POST` | `/payments/invoices` | ✅ | Admin | Generate 1Bill-style invoice |
-| `GET` | `/payments/invoices` | ✅ | Admin | List all invoices |
-| `GET` | `/payments/invoices/me` | ✅ | Student | View own invoices |
-| `GET` | `/payments/invoices/pay/{token}` | ❌ | Public | View invoice via payment link |
-| `POST` | `/payments/record` | ✅ | Admin | Record manual payment |
-| `POST` | `/payments/webhook/1bill` | ❌ | Webhook | 1Bill payment callback |
+| :--- | :--- | :---: | :--- | :--- |
+| `POST` | `/sessions` | ✅ | Faculty, Admin | Start attendance session |
+| `PUT` | `/sessions/{id}/end` | ✅ | Faculty, Admin | End attendance session |
+| `GET` | `/sessions/{id}/records` | ✅ | Faculty, Admin | Get session records |
+| `POST` | `/mark` | ✅ | Student | Mark attendance with verification |
+| `POST` | `/heartbeat` | ✅ | Student | Send location heartbeat |
 
-### Analytics
+### Finance — `/api/v1/finance`
+
 | Method | Endpoint | Auth | Roles | Description |
-|---|---|---|---|---|
-| `GET` | `/analytics/revenue` | ✅ | Admin | Revenue summary by semester |
-| `GET` | `/analytics/attendance` | ✅ | Admin, Faculty | Attendance analytics by course |
-| `GET` | `/analytics/enrollments` | ✅ | Admin, Faculty | Enrollment stats by course |
-| `GET` | `/analytics/payroll` | ✅ | Admin | Payroll summary by month |
+| :--- | :--- | :---: | :--- | :--- |
+| `POST` | `/fees` | ✅ | Admin | Create fee structure |
+| `GET` | `/fees` | ✅ | Admin, Faculty | List fee structures |
+| `POST` | `/payroll` | ✅ | Admin | Create payroll entry |
+| `GET` | `/payroll` | ✅ | Admin | List payroll records |
+| `PUT` | `/payroll/{id}/status` | ✅ | Admin | Update payroll status |
+
+### Payments — `/api/v1/payments`
+
+| Method | Endpoint | Auth | Roles | Description |
+| :--- | :--- | :---: | :--- | :--- |
+| `POST` | `/invoices` | ✅ | Admin | Generate 1Bill-style invoice |
+| `GET` | `/invoices` | ✅ | Admin | List all invoices |
+| `GET` | `/invoices/me` | ✅ | Student | View own invoices |
+| `GET` | `/invoices/pay/{token}` | — | Public | View invoice via payment link |
+| `POST` | `/record` | ✅ | Admin | Record manual payment |
+| `POST` | `/webhook/1bill` | — | Webhook | 1Bill payment callback |
+
+### Analytics — `/api/v1/analytics`
+
+| Method | Endpoint | Auth | Roles | Description |
+| :--- | :--- | :---: | :--- | :--- |
+| `GET` | `/revenue` | ✅ | Admin | Revenue summary by semester |
+| `GET` | `/attendance` | ✅ | Admin, Faculty | Attendance analytics by course |
+| `GET` | `/enrollments` | ✅ | Admin, Faculty | Enrollment stats by course |
+| `GET` | `/payroll` | ✅ | Admin | Payroll summary by month |
 
 ---
 
 ## 🛠 Tech Stack
 
 | Layer | Technology |
-|---|---|
+| :--- | :--- |
 | **Language** | Python 3.10+ |
 | **Framework** | FastAPI 0.111 |
 | **ORM** | SQLAlchemy 2.0 |
 | **Migrations** | Alembic 1.13 |
 | **Validation** | Pydantic v2 (with email support) |
 | **Auth** | python-jose (JWT) + bcrypt |
-| **Database** | SQLite (dev) / PostgreSQL (prod-ready) |
+| **Database** | SQLite (dev) / PostgreSQL (prod) |
 | **Server** | Uvicorn (ASGI) |
 | **Env Config** | python-dotenv |
 
@@ -328,13 +338,14 @@ All endpoints are prefixed with `/api/v1`. Authentication uses **Bearer JWT toke
 
 ## 🧪 Testing
 
-Run the test suite from the `backend/` directory:
-
 ```bash
+# Run the test suite from the backend directory
+cd backend
 python -m pytest tests/ -v
 ```
 
-Current test coverage:
+**Current test coverage:**
+
 - `test_finance.py` — Fee structure, invoice, and payment flow tests
 - `test_verification.py` — Attendance verification pipeline tests
 
@@ -342,16 +353,16 @@ Current test coverage:
 
 ## 🗺 Roadmap
 
-- [x] **Phase 1** — Core architecture, user auth, roles, and profiles
-- [x] **Phase 2** — Course management with geofencing and enrollment
-- [x] **Phase 3** — Smart attendance verification engine (GPS + device + heartbeat)
-- [x] **Phase 4** — Finance module (fee structures, 1Bill invoices, payments, payroll)
-- [x] **Phase 5** — Analytics dashboard endpoints
-- [ ] **Phase 6** — Frontend (React + Vite) — *In Progress*
-- [ ] **Phase 7** — Alembic migration scripts for schema versioning
-- [ ] **Phase 8** — Email notifications (invoice reminders, attendance alerts)
-- [ ] **Phase 9** — Docker containerization and CI/CD pipeline
-- [ ] **Phase 10** — Production deployment (PostgreSQL + Nginx + Gunicorn)
+- [x] Core architecture, user auth, roles, and profiles
+- [x] Course management with geofencing and enrollment
+- [x] Smart attendance verification engine (GPS + device + heartbeat)
+- [x] Finance module (fee structures, 1Bill invoices, payments, payroll)
+- [x] Analytics dashboard endpoints
+- [ ] Frontend (React + Vite) — *In Progress*
+- [ ] Alembic migration scripts for schema versioning
+- [ ] Email notifications (invoice reminders, attendance alerts)
+- [ ] Docker containerization and CI/CD pipeline
+- [ ] Production deployment (PostgreSQL + Nginx + Gunicorn)
 
 ---
 
@@ -360,9 +371,9 @@ Current test coverage:
 Contributions are welcome! Please follow these steps:
 
 1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Commit** your changes (`git commit -m 'feat: add amazing feature'`)
-4. **Push** to the branch (`git push origin feature/amazing-feature`)
+2. **Create** a feature branch — `git checkout -b feature/amazing-feature`
+3. **Commit** your changes — `git commit -m 'feat: add amazing feature'`
+4. **Push** to the branch — `git push origin feature/amazing-feature`
 5. **Open** a Pull Request
 
 ---
@@ -373,11 +384,6 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 
 ---
 
-<div align="center">
-
-**Built with ❤️ using FastAPI**
-
-[⬆ Back to Top](#-university-management-system)
-
-</div>
-]]>
+<p align="center">
+  <strong>Built with ❤️ using FastAPI</strong>
+</p>
